@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="admin/_fragments :: head(~{title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签新增</title>
+    <link rel="stylesheet" href="../../static/css/me.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+    <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css">
+</head>
+<body  >
+<!--导航-->
+    <nav th:replace="admin/_fragments :: nav(3)" class="ui inverted attached segment m-padded-tb-mini" >
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header item">管理后台</h2>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="home icon"></i>博客</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+
+                <div class="right m-item m-mobile-hide menu">
+                    <div class="ui dropdown item">
+                        <div class="text">
+                            <img src="../../static/images/404.png" alt="" class="ui avatar image">
+                            李恒宇
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a href="#" class="item">注销</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+    <div class="ui attached pointing menu">
+        <div class="ui container">
+            <div class="right menu">
+                <a href="#" class="active teal item">发布</a>
+                <a href="#" class=" item">列表</a>
+            </div>
+        </div>
+    </div>
+<!--中间内容-->
+    <div class="m-container m-padded-tb-massive" style="margin-top: 10em !important;margin-bottom: 10.6em !important; ">
+        <div class="ui container">
+            <form action="#" method="post" th:action="*{id}==null ? @{/admin/tags} : @{/admin/tags/{id}(id=*{id})} " class="ui form">
+
+                <div class="required field">
+                    <div class="ui left labeled input">
+                        <label  class="ui teal basic label">名称</label>
+                        <input tag="text" name="name" placeholder="请输入标签名称" th:value="${tag.getName()}">
+                    </div>
+                </div>
+
+
+
+                <div class="ui error message"></div>
+                <div class="ui mini negative message" th:unless="${#strings.isEmpty(message)}" th:text="|提示: ${message}">提示：不能添加重复的标签</div>
+                <div class="ui right aligned container">
+                    <button type="button" class="ui button" onclick="window.history.go(-1)">返回</button>
+                    <button class="ui submit teal button">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<!--底部栏-->
+    <footer   th:replace="admin/_fragments :: fotter" class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <img src="../../static/images/404.png" class="ui rounded image" style="width:110px">
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-opacity-mini">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">博客1</a>
+                        <a href="#" class="item">博客2</a>
+                        <a href="#" class="item">博客3</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-opacity-mini">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-opacity-mini">Email:13941715477@163.com</a>
+                        <a href="#" class="item m-opacity-mini">QQ:289989142</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-opacity-mini" >Blog</h4>
+                    <p class="m-opacity-mini">这是我的个人博客，会分享关于编程，生活，思考，娱乐相关的任何内容，希望可以给来这里的人一些帮助。。。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin  m-opacity-tiny">Copyright © 2020 凉生 Designed by lhy</p>
+        </div>
+
+    </footer>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<!--footer的最新推荐-->
+<script>
+    $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+</script>
+<script>
+
+
+    $('.menu.toggle').click(function (){
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown();
+
+    $('.ui.form').form({
+        fields:{
+            title:{
+                identifier:'name',
+                rules:[{
+                    type:'empty',
+                    prompt:'请输入标签名称'
+                }]
+            }
+        }
+    })
+
+
+
+</script>
+</body>
+</html>

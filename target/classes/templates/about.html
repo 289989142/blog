@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <title>关于我</title>
+    <link rel="stylesheet" href="../static/css/me.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+</head>
+<body  >
+<!--导航-->
+    <nav class="ui inverted attached segment m-padded-tb-mini" th:replace="_fragments :: nav(5)">
+        <div class="ui container">
+            <div class="ui inverted secondary stackable menu">
+                <h2 class="ui teal header item">Blog</h2>
+                <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+                <a href="#" class="active m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+                <div class="right m-item item m-mobile-hide">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" placeholder="Search...">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+<!--中间内容-->
+    <div class=" m-padded-tb-big">
+        <div class="ui container">
+            <div class="ui stackable grid ">
+                <div class="eleven wide column">
+                    <div class="ui segment">
+                        <img src="../static/images/rainbow.jpg" th:src="@{/images/rainbow.jpg}"  alt="" class="ui rounded images" style="width: 739px;">
+                    </div>
+                </div>
+                <div class="five wide column">
+                    <div class="ui top attached segment">
+                        <div class="ui header">关于我</div>
+                    </div>
+                    <div class="ui attached segment ">
+                        <p class="m-text-spaced" >
+                            李恒宇.java程序员.希望与大家共同成长
+                        </p>
+                        <p class="m-text-spaced" >
+                            喜欢编程，正在寻找高效的学习方法
+                        </p>
+                    </div>
+                    <div class="ui attached segment">
+                        <div class="ui orange basic label left pointing">编程 </div>
+                        <div class="ui orange basic label left pointing">写作 </div>
+                        <div class="ui orange basic label left pointing">思考 </div>
+                        <div class="ui orange basic label left pointing">运动 </div>
+                    </div>
+                    <div class="ui attached segment">
+                        <div class="ui teal basic label left pointing m-margin-tb-small">Java </div>
+                        <div class="ui teal basic label left pointing m-margin-tb-small">Spring </div>
+                        <div class="ui teal basic label left pointing m-margin-tb-small">Mybatis </div>
+                        <div class="ui teal basic label left pointing m-margin-tb-small">SpringBoot </div>
+                        <div class="ui teal basic label left pointing m-margin-tb-small">MYSQL </div>
+                    </div>
+                    <div class="ui bottom attached segment">
+                        <a href="#" class="ui circular icon button"><i class="github icon"></i></a>
+                        <a href="#" class="ui wx circular icon button" data-content="13941715477" data-position="bottom center"><i class="weixin icon"></i></a>
+                        <a href="#" class="ui qq circular icon button" data-content="289989142" data-position="bottom center"><i class="qq icon"></i></a>
+                        <a href="#" class="ui mail circular icon button" data-content="13941715477@163.com" data-position="bottom center"><i class="mail icon"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--底部栏-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <img src="../static/images/404.png" class="ui rounded image" style="width:110px">
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-opacity-mini">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item">博客1</a>
+                        <a href="#" class="item">博客2</a>
+                        <a href="#" class="item">博客3</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-opacity-mini">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-opacity-mini">Email:13941715477@163.com</a>
+                        <a href="#" class="item m-opacity-mini">QQ:289989142</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-opacity-mini" >Blog</h4>
+                    <p class="m-opacity-mini">这是我的个人博客，会分享关于编程，生活，思考，娱乐相关的任何内容，希望可以给来这里的人一些帮助。。。</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin  m-opacity-tiny">Copyright © 2020 凉生 Designed by lhy</p>
+        </div>
+
+    </footer>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+<!--footer的最新推荐-->
+<script>
+    $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+</script>
+<script>
+    $('.menu.toggle').click(function (){
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+    $('.qq').popup();
+    $('.wx').popup();
+    $('.mail').popup();
+</script>
+</body>
+</html>

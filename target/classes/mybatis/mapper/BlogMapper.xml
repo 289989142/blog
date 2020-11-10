@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lhy.mapper.BlogMapper">
+
+    <!--查询出文章评论数量并更新-->
+    <update id="getCommentCountById" parameterType="com.lhy.pojo.Blog">
+        update blog.blog b set b.comment_count = (
+        select count(*) from blog.comment c where c.blog_id = #{id} and b.id = #{id}
+        ) WHERE b.id = #{id}
+    </update>
+
+
+
+    <resultMap id="blogs" type="com.lhy.pojo.Blog">
+
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="recommend" column="recommend"/>
+        <result property="description" column="description"/>
+        <result property="published" column="published"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="firstPicture" column="first_picture"/>
+        <result property="shareStatement" column="share_statement"/>
+        <result property="comment" column="commentabled"/>
+        <result property="tagIds" column="tag_ids"/>
+        <result property="flag" column="flag"/>
+        <result property="typeId" column="type_id"/>
+        <result property="views" column="views"/>
+        <association property="type" javaType="Type">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+        </association>
+        <collection property="tags" ofType="Tag" >
+            <id property="id" column="tag_id"/>
+            <result property="name" column="name"/>
+        </collection>
+    </resultMap>
+
+    <!--根据标签查询博客-->
+    <select id="getBlogByTagId" resultMap="blogs">
+    SELECT *
+    FROM blog_tag bt , blog b , tag t
+    WHERE bt.blog_id = b.id AND bt.tag_id = #{tagId}  AND bt.tag_id = t.id
+    </select>
+
+    <select id="getBlog" resultMap="blogs">
+            select * from blog.blog where id = #{id};
+    </select>
+
+    <select id="getAllBlog"  resultMap="blogs">
+         select *
+         from blog.blog b, blog.type t
+         where b.type_id = t.id
+         ;
+    </select>
+
+    <select id="getSearchBlog"  resultMap="blogs">
+        <bind name="pattern" value="'%' + query + '%'" />
+
+         select *
+         from blog.blog
+         where blog.title like #{pattern} or blog.description like #{pattern}
+    </select>
+
+
+    <select id="getAllBlogBySearch"  resultMap="blogs">
+
+        <if test="title != null">
+            <bind name="pattern" value="'%' + title + '%'" />
+        </if>
+
+        select * from blog.blog b, blog.type t where b.type_id = t.id
+        <if test="title != null">and title like #{pattern}</if>
+        <if test="typeId != null">and type_id = #{typeId}</if>
+    </select>
+
+    <!--新增保存文章-->
+    <insert id="saveBlog" parameterType="com.lhy.pojo.Blog"   >
+
+        insert into blog.blog (id,title, content, first_picture, flag,
+        views, comment_count,  share_statement, commentabled, published,
+        recommend, create_time, update_time, type_id,tag_ids, user_id, description)
+        values (#{id},#{title},#{content},#{firstPicture},#{flag},#{views},#{commentCount},
+        #{shareStatement},#{comment},#{published},#{recommend},#{createTime},
+        #{updateTime},#{typeId},#{tagIds},#{userId},#{description});
+
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select LAST_INSERT_ID()
+        </selectKey>
+
+    </insert>
+
+    <!--编辑修改文章-->
+    <update id="updateBlog" parameterType="com.lhy.pojo.Blog">
+        update blog.blog set published = #{published},flag = #{flag} ,
+        title = #{title}, content = #{content}, type_id = #{typeId}, tag_ids = #{tagIds},
+        first_picture = #{firstPicture} , description = #{description} ,
+        recommend = #{recommend} ,  share_statement = #{shareStatement},
+        commentabled = #{comment} ,update_time = #{updateTime} where id = #{id};
+    </update>
+
+    <!--删除文章-->
+    <delete id="deleteBlog">
+        delete from blog.blog where id = #{id}
+    </delete>
+
+
+    <!--保存标签和博客的多对多关系-->
+    <insert id="saveBlogWithTag" parameterType="map">
+        insert into blog.blog_tag(blog_id, tag_id)
+        VALUE 
+        <foreach collection="blogTag" item="tag"  separator=",">
+            (#{blogId},#{tag})
+        </foreach>
+    </insert>
+    
+    <!--按更新时间降序查找推荐的播客--> 
+    <select id="getNumRecommendBlog" resultMap="blogs">
+        SELECT id,title
+        FROM blog
+        WHERE recommend = true
+        ORDER BY update_time desc
+        limit #{num}
+    </select>
+
+    <!--查询博客总数-->
+    <select id="getBlogNum" resultType="int">
+        select count(*)
+        from blog
+    </select>
+
+    <!--文章访问自增-->
+    <update id="updateViews" >
+        update blog.blog b set b.views = b.views+1 where b.id = #{id}
+    </update>
+</mapper>
+
+
+<!---->

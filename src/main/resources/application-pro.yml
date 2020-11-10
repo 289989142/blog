@@ -1,0 +1,24 @@
+
+spring:
+  datasource:
+    username: root
+    password: 289989142
+    url: jdbc:mysql://39.103.152.64:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+mybatis:
+  type-aliases-package: com.lhy.pojo
+  mapper-locations: classpath:mybatis/mapper/*.xml
+
+
+
+
+logging:
+  level:
+    root: warn
+    com.lhy: info
+
+
+server:
+  port: 8081

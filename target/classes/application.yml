@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: pro
+
+server:
+  port: 8081
+
+comment.avatarC: /images/avatarC.jpg
