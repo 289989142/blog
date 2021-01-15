@@ -18,7 +18,3 @@ logging:
   level:
     root: warn
     com.lhy: info
-
-
-server:
-  port: 8081
