@@ -3,6 +3,6 @@ spring:
     active: pro
 
 server:
-  port: 8081
+  port: 8080
 
 comment.avatarC: /images/avatarC.jpg
