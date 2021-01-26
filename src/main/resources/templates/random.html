@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+
+    <title>首页</title>
+    <link rel="stylesheet" href="../static/css/me.css ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.css">
+</head>
+<body>
+<!--导航-->
+<nav th:replace="_fragments :: nav(6)" class="ui inverted attached segment m-padded-tb-mini">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="heart outline icon"></i>随机外卖</a>
+            <div class="right m-item item m-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--中间内容-->
+<div class="m-container m-padded-tb-big">
+    <div class="ui container">
+        <div class="ui secondary segment form">
+            <input type="hidden" name="page">
+
+            <div class="inline fields">
+                <div class="field">
+                    <input type="text" id="input" name="title" placeholder="请输入想吃的外卖" style="width: 500px">
+                </div>
+
+                <div class="field">
+                    <button type="button" id="add-btn" class="ui teal basic button"><i class="pencil icon"></i>确认</button>
+                </div>
+            </div>
+        </div>
+        <div class="ui secondary segment form">
+            <h3>外卖列表</h3>
+            <div class="ui ordered list" id="list">
+            </div>
+         </div>
+
+        <div class="ui secondary segment form">
+            <div id="context" style="font-size: 18px;color: orange; margin-bottom: 50px"></div>
+            <button class="ui teal basic button btn1">开始</button>
+            <button class="ui teal basic button btn2">停止</button>
+        </div>
+    </div>
+</div>
+<!--底部栏-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <img src="../static/images/404.png" class="ui rounded image" style="width:110px">
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-opacity-mini">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">博客1</a>
+                    <a href="#" class="item">博客2</a>
+                    <a href="#" class="item">博客3</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-opacity-mini">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item m-opacity-mini">Email:13941715477@163.com</a>
+                    <a href="#" class="item m-opacity-mini">QQ:289989142</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-opacity-mini">Blog</h4>
+                <p class="m-opacity-mini">这是我的个人博客，会分享关于编程，生活，思考，娱乐相关的任何内容，希望可以给来这里的人一些帮助。。。</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin  m-opacity-tiny">Copyright © 2020 凉生 Designed by lhy</p>
+    </div>
+
+</footer>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.10/semantic.min.js"></script>
+
+
+<script>
+    $('.menu.toggle').click(function (){
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+
+    $('#add-btn').click(function () {
+        let elementById = document.getElementById('list');
+
+        let a = document.createElement("li");
+        a.className = "item";
+        a.id = 'li';
+        let val = document.getElementById('input').value;
+
+        if (val == '' || val == ' '){
+            alert('请输入外卖名称')
+        }else {
+            a.innerText = val;
+            a.value = val;
+            elementById.appendChild(a);
+            document.getElementById('input').value = '';
+        }
+    })
+
+
+    var $timer;
+    var $arr = ['你是谁', '我是谁', '她是谁', '他是谁', '又是谁', 'how是谁', '都是谁', '它是谁', '谁谁谁'];
+
+    function Random(x, y) {
+        return parseInt(Math.random() * (x - y + 1) + y);
+    }
+
+    function content() {
+        clearInterval($timer);
+        $timer = setInterval(function() {
+            $("#context").html($arr[Random(-1, 10)]);
+        }, 50);
+    }
+    $(".btn1").click(function() {
+        $arr = [];
+        var list = document.getElementsByTagName("li");
+        for(var i = 0; i < list.length; i++) {
+            $arr[i] = list[i].innerText;
+        }
+        content();
+    })
+    $(".btn2").click(function() {
+        clearInterval($timer);
+    })
+</script>
+
+<div class="xl-chrome-ext-bar" id="xl_chrome_ext_{4DB361DE-01F7-4376-B494-639E489D19ED}" style="display: none;">
+    <div class="xl-chrome-ext-bar__logo"></div>
+
+    <a id="xl_chrome_ext_download" href="javascript:;" class="xl-chrome-ext-bar__option">下载视频</a>
+    <a id="xl_chrome_ext_close" href="javascript:;" class="xl-chrome-ext-bar__close"></a>
+</div></body></html>

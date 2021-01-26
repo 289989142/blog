@@ -68,5 +68,9 @@ public class IndexController {
 
         return "_fragments :: newblogList";
     }
+    @GetMapping("/random")
+    public String random(){
+        return "random";
+    }
 
 }
