@@ -2,7 +2,7 @@
 # ---- General Settings --------------- #
 # ------------------------------------- #
 baseURL = "https://blog-5b0.pages.dev"
-title = "Den"
+title = "eureka"
 theme = "hugo-theme-den"
 #enableRobotsTXT = true       # generate robots.txt
 enableEmoji = true           # use emoji support
@@ -40,7 +40,7 @@ defaultContentLanguageInSubdir = true
   pages = "/:slug/"
 
 [author]                     # required
-  name = "Jane Doe"
+  name = "eureka"
 
 [sitemap]                    # required
   changefreq = "weekly"
@@ -57,8 +57,8 @@ defaultContentLanguageInSubdir = true
 
   # site info (optional)
   keywords = ["Hugo", "theme","den"]
-  description = "A simple theme for Hugo"
-  logoTitle = "Den" # shown on top-left, default: title
+  description = "A simple Site"
+  logoTitle = "eureka" # shown on top-left, default: title
   siteLogoImage = "images/globe.svg"     # shown besides logoTitle
   # headerTitle = "Den"                   # default: title
   headerImage = "images/background.jpg"
@@ -119,11 +119,7 @@ defaultContentLanguageInSubdir = true
     weight = 10
     identifier = "notes"
     url = "category/notes/"
-  [[languages.en.menu.main]]
-    name = "Demos"
-    weight = 20
-    identifier = "demos"
-    url = "category/demos/"
+
 
   [[languages.en.menu.social]]
     name = "GitHub"
