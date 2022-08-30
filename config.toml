@@ -125,12 +125,12 @@ defaultContentLanguageInSubdir = true
     name = "GitHub"
     weight = 10
     identifier = "github"
-    url = "https://github.com/shaform/hugo-theme-den/"
+    url = "https://github.com/289989142/"
 
   [[languages.en.menu.links]]
     name = "About Me"
     weight = 10
     identifier = "about-me"
-    url = "https://github.com/shaform/hugo-theme-den/"
+    url = "https://github.com/289989142/"
 
 ignoreErrors = ["error-remote-getjson"]
