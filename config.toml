@@ -61,7 +61,7 @@ defaultContentLanguageInSubdir = true
   logoTitle = "eureka" # shown on top-left, default: title
   siteLogoImage = "images/globe.svg"     # shown besides logoTitle
   # headerTitle = "Den"                   # default: title
-  headerImage = "images/background.png"
+  headerImage = "https://c2.im5i.com/2022/08/31/u9xYW.png"
   showAuthorCard = true # Whether to show author information below the article
 
   showMenuLanguages = true
