@@ -2,7 +2,7 @@
 # ---- General Settings --------------- #
 # ------------------------------------- #
 baseURL = "https://aneureka.com"
-title = "eureka"
+title = "Eureka!"
 theme = "hugo-theme-den"
 #enableRobotsTXT = true       # generate robots.txt
 enableEmoji = true           # use emoji support
