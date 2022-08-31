@@ -58,7 +58,7 @@ defaultContentLanguageInSubdir = true
   keywords = ["Hugo", "theme","den"]
   description = "A simple Site"
   logoTitle = "eureka" # shown on top-left, default: title
-  siteLogoImage = "damotouicon.ico"     # shown besides logoTitle
+  siteLogoImage = "images/damotouicon.ico"     # shown besides logoTitle
   # headerTitle = "Den"                   # default: title
   headerImage = "https://c2.im5i.com/2022/08/31/u9xYW.png"
   showAuthorCard = true # Whether to show author information below the article
@@ -67,7 +67,7 @@ defaultContentLanguageInSubdir = true
 
   autoLoadComments = false # auto load comment when scrolling down
 
-  customFavicon = "damotouicon_small.ico"
+  customFavicon = "images/damotouicon_small.ico"
 
   # paginate style, default use numbered pagination links
   # if true, use original "Previous" and "Next" links.
